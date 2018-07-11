@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        //练习回溯
+        var queens = [0, 0, 0, 0, 0, 0, 0, 0];
+        var counter = 0;//n皇后的解法数
+        
+        function noSameRow(queens, col, pos) {
+            for (var i = 0; i < col; ++i) {
+                if (queens[i] === pos) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function noSameDia(queens, col, pos) {
+            for (var i = 0; i < col; ++i) {
+                if (Math.abs(pos - queens[i]) === col - i) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function isSafe(queens, col, pos) {
+            return (noSameRow(queens, col, pos) && noSameDia(queens, col, pos));
+        }
+
+
+        function place(queens, col) {
+
+            if (col === queens.length - 1) {
+                for (var i = 0; i < queens.length; ++i) {
+                    if (isSafe(queens, col, i)) {
+                        queens[col] = i;
+                        ++counter;
+                        // console.log("0,1,2,3,4,5,6,7");
+                        console.log(queens);
+                    }
+                }
+            } else {
+
+                for (var pos = 0; pos < queens.length; ++pos) {
+                    // console.log(pos);
+                    if (isSafe(queens, col, pos)) {
+                        queens[col] = pos;
+                        place(queens, col + 1);
+                    }
+                }
+            }
+        }
+
+        place(queens, 0);
+        console.log("counter: " + counter);
+    </script>
+
+
+</body>
+
+</html>
