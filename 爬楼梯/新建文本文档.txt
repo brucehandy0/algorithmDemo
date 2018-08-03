@@ -1,0 +1,44 @@
+#include <iostream>
+#include<string.h>
+using namespace std;
+ 
+int factorial(int n)    //求阶乘
+{
+    return n>1?(n*factorial(n-1)):1;
+}
+ 
+int C(int N,int n)
+{
+    return factorial(N)/(factorial(N-n)*factorial(n)) ;
+}
+ 
+int Fanc1(int n)   //非递归法
+{
+    int temp=0;
+    for(int i=0;i*2<=n;++i)
+        temp+=C(n-i,i);
+    return temp;
+ 
+}
+ 
+int Fanc2(int n)   //递归法
+{
+    if(n>2)
+        return Fanc2(n-1)+Fanc2(n-2);
+    else
+        return n;
+}
+int main()
+{
+    cout<<"非递归法:"<<endl;
+    for (int i=1;i!=10;++i)
+    {
+        cout<<i<<"          "<<Fanc1(i)<<endl;
+    }cout<<"递归法:"<<endl;
+    for (int i=1;i!=10;++i)
+    {
+        cout<<i<<"          "<<Fanc2(i)<<endl;
+    }
+    return 0;
+}
+重大通知：90后老
