@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    var map = [];
+    for(var i=1;i<=10;i++){
+        map.push(i);
+    }
+    // 每隔2搞掉
+    var totalLen = map.length;
+    //arr 总容器 
+    //n 第一次删除的下标，好像没什么用
+    //len 总长度，每次循环都变
+    //总长度 ，不经常变
+    //n = n + 2 ，这个2可以看成：每数到第2个人就让其出列，可以修改
+    function joscphus(arr,n,len,totalLen){
+        if(len>1){
+            console.warn(arr)
+            arr = deleteOne(n,arr,totalLen);
+            len = len-1;
+            n = n + 2;
+            if(n>totalLen-1){
+                n= n%(totalLen-1)-1
+                //重新编号数组，长度改变，删除空的
+                var l = arr.length
+                var newArr = []
+                for(var i=0;i<arr.length;i++){
+                    if(arr[i]){
+                        newArr.push(arr[i])
+                    }
+                }
+                totalLen = newArr.length;
+                 return joscphus(newArr,n,len,totalLen);
+            }else{
+                 return joscphus(arr,n,len,totalLen);
+            }
+        }else if(len == 1){
+            return arr
+        }   
+    }
+
+    //1位置2容器,3不经常变的数组长度
+    function deleteOne(index,arr,totalLen){
+        if(arr[index]){
+            delete arr[index]
+         }else{
+            if(index+1>totalLen-1){
+                return deleteOne(0,arr,totalLen)
+            }else{
+                return deleteOne(index+1,arr,totalLen)
+            }
+         }
+        return arr;
+    }
+
+    //第一次是1，第二个
+    var result = joscphus(map,1,map.length,map.length)
+    console.log(result);
+    </script>
+</body>
+</html>
