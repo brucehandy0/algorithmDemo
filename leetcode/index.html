@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+  
+  var str = 'abc';
+  var str1 = 'abccba';
+  var str2 = 1000021
+  var str2 = 121
+  // console.log(typeof(str2))
+  // 9.回文数
+  // 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。
+  var isPalindrome = function(x) {
+    if(typeof(x)==='number'){
+      x = x.toString()
+    }
+    var arr = x.split('')
+    var len = arr.length
+    for(let i=0;i<len;i++){
+      for(let j=0;j<len;j++){
+        if(arr[len-j-1] == arr[j]){
+        }else{
+          return false
+        }
+      }
+    }
+    return true;
+  };
+  var a = isPalindrome(str2)
+  // console.log(a)
+
+  //100.相同的树
+  //给定两个二叉树，编写一个函数来检验它们是否相同。
+  //如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。
+  //这个答案没过
+  var isSameTree = function(p, q) {
+    if (p.length != q.length){
+      return false;
+    }
+    var len = p.length;
+    for (var i = 0, l = len; i < l; i++) {
+      if (p[i] instanceof Array && q[i] instanceof Array) {
+        if (!p[i].equals(q[i]))
+          return false;    
+      }      
+      else if (p[i] != q[i]) { 
+        return false;  
+      }      
+    }    
+    return true;
+  };
+  console.log(isSameTree([1,2],[1,null,2]))
+
+
+
+  </script>
+</body>
+</html>
