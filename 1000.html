@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+//         var total = 6
+//         var type1 = 1, type2 = 2, type3 = 3;
+//         var res = [];
+//         // 1000/3 = 333;
+//         // for (var i = 0; i <= 1000; i++) {//c
+//         //     for (j = 0; j <= 1000; j++) {//b
+//         //         for (k = 0; k <= 1000; k++) {//a
+//         //             if (k * 1 + j * 2 + i * 3 == total) {
+//         //                 res.push({
+//         //                     k,j,i
+//         //                 })
+//         //             };
+//         //         }
+//         //     }
+
+//         // }
+
+
+//         // f（n）＝f（n－1）＋f（n－2）＋f（n－3）
+// // console.log(res);
+// 题目 ，1000个台阶，可以走1阶，2阶，3阶，  共有多少种走法
+// var i=0
+        //斐波那契数列
+i=0
+function outter(n){
+    var backs = [];
+    return fn(backs,n)
+}
+
+function fn(backs,n){
+    // i++;
+    if(n==3){
+        return 4
+    }else if(n==2){
+        return 2
+    }else if(n==1){
+        return 1
+    }
+
+    if(backs[n]){
+        return backs[n]
+    }else{
+        
+        backs[n] = fn(backs,n-1)+fn(backs,n-2)+fn(backs,n-3)
+        return backs[n]
+    }
+    // if(n>3){
+        // return fn(n-1)+fn(n-2)+fn(n-3)
+    // } 
+}
+
+
+
+
+
+// console.log(outter(1000))
+
+
+function fib2(n){
+    if(n==3){
+        return 4
+    }else if(n==2){
+        return 2
+    }else if(n==1){
+        return 1
+    }
+    var cur=4,prev=2,prev2=1;
+    var sum=0;
+    for(var i=4;i<=n;i++){
+        sum = cur+prev2+prev;
+        prev2 = prev;
+        prev = cur;
+        cur = sum;
+    }
+    return cur
+}
+
+
+
+// function fib2(n){
+//     if(n==0){
+//         return n
+//     }else if(n==1){
+//         return n
+//     }
+
+//     var prev=0,cur=1;
+//     var sum=0;
+//     for(var i=2;i<=n;i++){
+//         sum = prev+ cur;
+//         prev = cur;
+//         cur = sum;
+//     }
+//     return cur;
+// }
+
+console.log(fib2(1000));
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        //2. Add Two Numbers
+        function ListNode(val, next) {
+            this.val = (val === undefined ? 0 : val)
+            this.next = (next === undefined ? null : next)
+        }
+        var addTwoNumbers = function (l1, l2) {
+            let res;
+            var r1 = ""
+            function calc(ListNode, r) {
+                if (ListNode.val) {
+                    r = r + ListNode.val
+                }
+
+                if (ListNode.next) {
+                    r = calc(ListNode.next, r)
+                } else {
+                    return r;
+                }
+
+                return r;
+            }
+            var r1 = calc(l1, "")
+            var r2 = calc(l2, "")
+
+            r1 = r1.split('').reverse().join('')
+            r2 = r2.split('').reverse().join('')
+            function add(str1, str2) {
+                if (str1 == 0 && str2 == 0) {
+                    return 0;
+                }
+                str1 = str1.split("");
+                str2 = str2.split("");
+                let result = "";//结果
+                let flag = 0;
+                while (str1.length || str2.length || flag) {
+                    flag += ~~str1.pop() + ~~str2.pop();
+                    result = flag % 10 + result;
+                    flag = flag > 9;
+                }
+                return result.replace(/^0+/, '');
+            }
+
+            res = add(r1, r2);
+            res = res.toString().split('')
+            for (var i = 0; i < res.length; i++) {
+                var temp = node;
+                if (!temp) {
+                    temp == null;
+                }
+                var node = new ListNode(res[i], temp)
+            }
+            return node;
+        };
+        // var l1 = [2, 4, 3], l2 = [5, 6, 4]
+        // addTwoNumbers(l1, l2)
+
+        //14. Longest Common Prefix
+
+        var longestCommonPrefix = function (strs) {
+
+            function compare(str1, str2) {
+                if (!(str1 instanceof Array)) {
+                    str1 = str1.split('')
+                }
+                if (!(str2 instanceof Array)) {
+                    str2 = str2.split('')
+                }
+
+                var res = [], tempJ = 0;
+                for (var i = 0; i < str1.length; i++) {
+                    for (var j = tempJ; j < str2.length; j++) {
+                        if (str1[i] == str2[j]) {
+                            res.push(str1[i]);
+                            tempJ = j + 1;
+                            break;
+                        } else {
+                            res.push(',');
+                        }
+                    }
+                }
+                console.log(res)
+
+                var r = [];
+                for (var k = 0; k < res.length; k++) {
+                    var obj = ""
+
+                    for (var j = 0; (k + j) < res.length; j++) {
+                        if (res[k + j] != ",") {
+                            obj = obj + res[k + j];
+                        } else {
+                            break;
+                        }
+                    }
+
+                    if (obj) {
+                        r.push(obj);
+                    }
+                }
+                console.log("r", r);
+
+                var max = 0;
+                for (var k = 0; k < r.length; k++) {
+
+                    if (r[k].length < r[k].length) {
+                        max = k;
+                    }
+                }
+                console.log('max', r[max])
+
+                if (r[max]) {
+                    return r[max];
+                } else {
+                    return "";
+                }
+            }
+
+            var temp;
+            var len = strs.length;
+            if (len == 1) {
+                return strs[0];
+            }
+            for (i = 0; i <= len - 2; i++) {
+                if (i == 0) {
+                    temp = compare(strs[i], strs[i + 1]);
+                } else {
+                    temp = compare(temp, strs[i + 1])
+                }
+            }
+            console.log('temp', temp)
+
+            if (temp) {
+                return temp
+            } else {
+                return ""
+            }
+
+        };
+
+        // var a = ["flower","flow","flighot"];
+        // var a = ["a"];
+        // var a =["cir","car"]
+        // var a =["dog","racecar","car"]
+        // var a = ["reflower", "flow", "flight"]
+
+        // console.log(longestCommonPrefix(a));
+
+        /**
+         * 
+         * */
+        //     背包问题,  现在四个物品，  背包总容量是8，怎样得到价值最多的物品
+        //物品编号 重量，价值 
+        // {id:1,weight:2,value:3}
+        // {id:2,weight:3,value:4}  
+        // {id:3,weight:4,value:5}
+        // {id:4,weight:5,value:8}
+        //
+        var arr = [
+            { id: 1, weight: 2, value: 3 },
+            { id: 2, weight: 3, value: 4 },
+            { id: 3, weight: 4, value: 5 },
+            { id: 4, weight: 5, value: 8 }
+        ]
+        res = []
+        var i = 0
+        function bag(n, weight, value) {
+            // console.log("n", n);
+            // console.log("weight", weight);
+            // console.log("value", value);
+            if (n == 0) {
+                res.push(value)
+                return
+            }
+            if (weight <= 0) {
+                res.push(value)
+                return
+            }
+
+            if (weight < arr[n - 1].weight) {
+                bag(n - 1, weight, value)
+            } else {
+                Math.max(bag(n - 1, weight, value), bag(n - 1, weight - arr[n - 1].weight, value + arr[n - 1].value))
+            }
+        }
+
+        // var a = bag(4, 8, 0)
+        // console.log(res);
+
+        // console.log(Math.max.apply(null,res));
+
+
+
+        function bag2() {
+            var w = [0, 2, 3, 4, 5];
+            var v = [0, 3, 4, 5, 8];
+            var f = [];
+            for (var p = 0; p < 5; p++) {
+                f[p] = [];
+                for (var u = 0; u < 9; u++) {
+                    f[p][u] = 0;
+                }
+            }
+            console.log(f);
+
+            // var i,j
+            //f[4][8],4个东西，8重量
+            for (var i = 1; i < 5; i++) {
+                for (var j = 1; j < 9; j++) { //j背包重量
+                    if (w[i] > j) {
+                        f[i][j] = f[i - 1][j];
+                    } else {
+                        f[i][j] = Math.max(f[i - 1][j], f[i - 1][j - w[i]] + v[i])
+                    }
+                }
+            }
+
+            console.log(f);
+        }
+        bag2()
+
+    </script>
+</body>
+
+</html>

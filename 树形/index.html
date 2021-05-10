@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        let data = [
+            // {
+            //     id: 0,
+            //     pid: null
+            // },
+            {
+                id: 2,
+                pid: 0,
+            },
+            {
+                id: 3,
+                pid: 2
+            },
+            {
+                id: 4,
+                pid: 3
+            },
+            {
+                id: 5,
+                pid: 2
+            },
+            {
+                id: 6,
+                pid: 0
+            },
+            {
+                id: 7,
+                pid: 5
+            }
+        ]
+
+
+        //期待结果
+        // res = [
+        //     {
+        //         id:0,
+        //         pid:null,
+        //         children:[
+        //             {
+        //                 id:2,
+        //                 pid:0
+        //             },
+        //             {
+        //                 id:6,
+        //                 pid:0
+        //             },
+        //         ]
+        //     }
+        // ]
+        let res = [
+
+        ];
+
+
+        var r = {
+            id: 0,
+            pid: null
+        };
+        function ff(node, r) {
+
+            r.children = [];
+            if (node.length > 0) {
+                node = node.filter(vv => {
+                    if (r.id == vv.pid) {
+                        r.children.push(vv);
+                        return false
+                    } else {
+                        return true
+                    }
+                })
+                if (r.children.length > 0) {
+                    r.children.map(k => {
+                        ff(node, k)
+                    })
+                }
+            } else {
+                console.log('jieshu')
+            }
+
+            return r;
+
+        }
+        let b= ff(data, r)
+        console.log(b)
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
